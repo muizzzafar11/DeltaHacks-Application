@@ -44,6 +44,9 @@ dev_dependencies:
   # Changing app id
   change_app_package_name: ^0.1.2
   
+  # RTDB
+  firebase_database: ^6.1.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

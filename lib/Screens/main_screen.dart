@@ -6,7 +6,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: new ElevatedButton(
-        onPressed: () => print("MainScreenButtonPressed"),
+        onPressed: () => fireStore.signOutUser(),
         child: const Text(
           'Click Me',
           style: TextStyle(fontSize: 20),
