@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'Screens/init_screen.dart';
+import 'Screens/pills_screen.dart';
+import 'Screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Password Manager',
       debugShowCheckedModeBanner: false,
-      home: InitScreen(),
+      home: MainScreen(),
       darkTheme: ThemeData(
         brightness: Brightness.light,
       ),
