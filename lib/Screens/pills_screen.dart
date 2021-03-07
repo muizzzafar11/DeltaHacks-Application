@@ -1,6 +1,7 @@
 import 'package:deltahacks/pill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 const data = {
   {"name": "pill1", "Pills Left": 7, "Schedule": "1,0,1,2,0,1,0"},
@@ -43,14 +44,75 @@ class _PillTileState extends State<PillTile> {
           title: Text(
             listOfPills[widget.index].name,
           ),
-          trailing: IconButton(
-            icon: Icon(Icons.create_rounded),
-            onPressed: () {
-              setState(() {
-                print("Pressed!");
-              });
-            },
+          trailing: GestureDetector(
+            onTap: () => EditViewPopup(title: listOfPills[widget.index].name)
+                .popup(context),
+            child: Icon(Icons.create_rounded),
           ),
         ));
   }
 }
+
+class EditViewPopup {
+  final String title;
+  int numberOfPills, pillPerDay;
+
+  EditViewPopup({this.title});
+  popup(context) {
+    return AwesomeDialog(
+      context: context,
+      title: title,
+      headerAnimationLoop: false,
+      dialogType: DialogType.INFO,
+      animType: AnimType.SCALE,
+      body: Padding(
+          padding: EdgeInsets.all(2),
+          child: Column(
+            children: [
+              Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                        color: Color.fromRGBO(0, 0, 0, 1), fontSize: 30),
+                  )),
+              Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    obscureText: false,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(), labelText: "Total Pills"),
+                  )),
+              Padding(
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    obscureText: false,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Pills per Day"),
+                  )),
+              Padding(
+                padding: EdgeInsets.all(2),
+                child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return PillsPage();
+                      }));
+                    },
+                    child: Text("Save")),
+              )
+            ],
+          )),
+    )..show();
+  }
+}
+
+// IconButton(
+//             icon: Icon(Icons.create_rounded),
+//             onPressed: () {
+//               setState(() {
+//                 print("Pressed!");
+//               });
+//             },
+//           )
