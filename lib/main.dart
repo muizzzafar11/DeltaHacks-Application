@@ -7,6 +7,7 @@ import 'Screens/init_screen.dart';
 import 'Screens/login_screen.dart';
 import 'Screens/main_screen.dart';
 import 'Screens/pills_screen.dart';
+import './ui/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -48,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
          return LoginScreen();
    // Analytics Screen
    } else if(page == 3){
-
+  return HomePage();
    }
 }
   @override

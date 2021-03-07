@@ -39,6 +39,10 @@ dev_dependencies:
 
   # Navigation
   ff_navigation_bar: ^0.1.4
+
+  # Analytics Progress Bar 
+  sleek_circular_slider : ^1.2.0
+
   # Firestore DB
   cloud_firestore: ^1.0.0
 
