@@ -49,7 +49,9 @@ class _RandomValuePageState extends State<RandomValuePage> {
                       height: 5,
                     ),
                     Text(
-                      (50 - listOfPills[index].pillsLeft).toString() +
+                      (listOfPills[index].pillsLeft.toDouble())
+                              .abs()
+                              .toString() +
                           " Pills Left in Dispenser",
                       style: TextStyle(
                         fontSize: 20,
@@ -63,7 +65,8 @@ class _RandomValuePageState extends State<RandomValuePage> {
                     SleekCircularSlider(
                       appearance: appearance01,
                       initialValue:
-                          50.0 - listOfPills[index].pillsLeft.toDouble(),
+                          (listOfPills[index].pillsLeft.toDouble())
+                              .abs(),
                     ),
                   ]),
             )));
