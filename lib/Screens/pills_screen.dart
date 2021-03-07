@@ -1,0 +1,53 @@
+import 'package:deltahacks/components/popup.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:deltahacks/components/pill.dart';
+import 'package:deltahacks/components/pillTile.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
+const data = {
+  {"name": "pill1", "Pills Left": 7, "Schedule": "1,0,1,2,0,1,0"},
+  {"name": "pill2", "Pills Left": 20, "Schedule": "1,0,1,2,0,1,0"}
+};
+
+class PillsPage extends StatefulWidget {
+  @override
+  _PillsState createState() => _PillsState();
+}
+
+class _PillsState extends State<PillsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ListView.builder(
+          itemCount: listOfPills.length,
+          itemBuilder: (BuildContext context, int index) {
+            return PillTile(index);
+          }),
+      floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: 100),
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              return AddViewPopup().popup(context);
+            },
+            label: Icon(Icons.add),
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+    );
+  }
+}
+
+// bottomNavigationBar: CurvedNavigationBar(
+//         backgroundColor: Colors.blueAccent,
+//         items: <Widget>[
+//           Icon(Icons.analytics),
+//           Icon(Icons.home),
+//           Icon(Icons.medical_services_rounded)
+//         ],
+//         onTap: (index) {
+//           setState(() {
+//             _page = index;
+//           });
+//         },
+//       )
