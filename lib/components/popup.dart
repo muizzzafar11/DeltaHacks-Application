@@ -1,13 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:deltahacks/Screens/pills_screen.dart';
+import 'package:deltahacks/components/pill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EditViewPopup {
   final String title;
-  int numberOfPills, pillPerDay;
+  int numberOfPills, pillPerDay, index;
 
-  EditViewPopup({this.title});
+  EditViewPopup({this.title, this.index});
   popup(context) {
     return AwesomeDialog(
       context: context,
@@ -29,6 +30,9 @@ class EditViewPopup {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
+                    onChanged: (text) {
+                      numberOfPills = int.parse(text);
+                    },
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(), labelText: "Total Pills"),
@@ -36,6 +40,9 @@ class EditViewPopup {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
+                    onChanged: (text) {
+                      pillPerDay = int.parse(text);
+                    },
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -45,6 +52,18 @@ class EditViewPopup {
                 padding: EdgeInsets.all(2),
                 child: ElevatedButton(
                     onPressed: () {
+                      listOfPills[index].pillsLeft = numberOfPills;
+                      listOfPills.forEach((element) {
+                        print(element.schedule);
+                      });
+                      listOfPills[index].schedule =
+                          List<int>.generate(7, (index) => pillPerDay);
+                      // listOfPills.forEach((element) {
+                      //   print("-----------------");
+                      //   print(element.name);
+                      //   print(element.pillsLeft);
+                      //   print(element.schedule);
+                      // });
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return PillsPage();
@@ -83,6 +102,9 @@ class AddViewPopup {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
+                    onChanged: (text) {
+                      name = text;
+                    },
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(), labelText: "Name"),
@@ -90,6 +112,9 @@ class AddViewPopup {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
+                    onChanged: (text) {
+                      numberOfPills = int.parse(text);
+                    },
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(), labelText: "Total Pills"),
@@ -97,6 +122,9 @@ class AddViewPopup {
               Padding(
                   padding: EdgeInsets.all(10),
                   child: TextField(
+                    onChanged: (text) {
+                      pillPerDay = int.parse(text);
+                    },
                     obscureText: false,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -106,6 +134,14 @@ class AddViewPopup {
                 padding: EdgeInsets.all(2),
                 child: ElevatedButton(
                     onPressed: () {
+                      listOfPills.add(Pill(
+                          name: name,
+                          pillsLeft: numberOfPills,
+                          schedule:
+                              List<int>.generate(7, (index) => pillPerDay)));
+                      // listOfPills.forEach((element) {
+                      //   print(element.schedule);
+                      // });
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                         return PillsPage();

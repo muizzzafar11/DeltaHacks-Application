@@ -1,5 +1,5 @@
 class Pill {
-  final int pillsLeft;
+  int pillsLeft;
   String name;
   List<int> schedule;
 
