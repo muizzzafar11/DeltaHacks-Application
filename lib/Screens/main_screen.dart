@@ -40,7 +40,9 @@ class _MainScreenState extends State<MainScreen> {
       return UserInfo();
     } else if (page == 2) {
       // Actual Pills Page
-      return PillsPage();
+      return PillsPage(voidCallback: () {
+        setState(() {});
+      });
     }
   }
 
