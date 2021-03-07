@@ -3,7 +3,8 @@ import 'package:deltahacks/Screens/pills_screen.dart';
 import 'package:deltahacks/components/pill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import '../googleauth.dart';
+import '../googleauth.dart';
 import '../main.dart';
 
 class EditViewPopup {
@@ -145,6 +146,16 @@ class AddViewPopup {
                       // listOfPills.forEach((element) {
                       //   print(element.schedule);
                       // });
+                      String schedule = "";
+                      for (int i = 0; i < 7; i++) {
+                        schedule += pillPerDay.toString();
+                        if (i < 7 - 1) {
+                          schedule += ",";
+                        }
+                      }
+                      //print(schedule);
+                      fireStore.writeToDb(listOfPills.length.toString(), name,
+                          numberOfPills, schedule);
                       voidCallback();
                       Navigator.pop(context);
                     },
