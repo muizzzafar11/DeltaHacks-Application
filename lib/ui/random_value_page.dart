@@ -3,6 +3,8 @@ import './utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
+import '../components/pill.dart';
+import '../components/pillTile.dart';
 
 class RandomValuePage extends StatefulWidget {
   @override
@@ -21,7 +23,11 @@ class _RandomValuePageState extends State<RandomValuePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: ListView.builder(
+          itemCount: listOfPills.length,
+          itemBuilder: (BuildContext context, int index) {
+       
+            return Container(
             child: SafeArea(
                 child: Align(
               alignment: Alignment.center,
@@ -29,27 +35,20 @@ class _RandomValuePageState extends State<RandomValuePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SleekCircularSlider(
-                      appearance: appearance01,
-                      initialValue: _currentValue.toDouble(),
-                    ),
-                    MaterialButton(
-                      height: 35.0,
-                      highlightElevation: 2.0,
-                      highlightColor: HexColor('#FED1CD'),
-                      shape: StadiumBorder(),
-                      color: HexColor('#FEA78D').withOpacity(0.9),
-                      child: Text('New value'.toUpperCase(),
+                                        Text(listOfPills[index].name,
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w200,
                               color: HexColor('#BD0016'))),
-                      onPressed: () {
-                        _generateRandomValue();
-                      },
-                    )
+                    SleekCircularSlider(
+                      appearance: appearance01,
+                      initialValue: Random().nextInt(100).toDouble(),
+                    ),
+
                   ]),
-            ))));
+            )));
+          }),
+);
   }
 }
 
