@@ -19,7 +19,6 @@ class PillsPage extends StatefulWidget {
 }
 
 class _PillsState extends State<PillsPage> {
-
   bool flag = false;
   bool prevFlag = true;
   int arrLen = 0;
@@ -27,7 +26,6 @@ class _PillsState extends State<PillsPage> {
   final VoidCallback voidCallback;
 
   _PillsState({this.voidCallback});
-
 
   @override
   void initState() {
@@ -38,20 +36,22 @@ class _PillsState extends State<PillsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.builder(
-          itemCount: listOfPills.length,
-          itemBuilder: (BuildContext context, int index) {
-            return PillTile(index);
-          }),
+      body: Padding(
+          padding: EdgeInsets.only(bottom: 110, top: 20, left: 10, right: 10),
+          child: ListView.builder(
+              itemCount: listOfPills.length,
+              itemBuilder: (BuildContext context, int index) {
+                return PillTile(index);
+              })),
       floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: 100),
+          padding: EdgeInsets.only(bottom: 40),
           child: FloatingActionButton.extended(
             onPressed: () {
               return AddViewPopup(this.voidCallback).popup(context);
             },
             label: Icon(Icons.add),
           )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
