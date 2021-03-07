@@ -58,11 +58,11 @@ class GoogleAuth {
   }
 
   Future<void> writeToDb(
-      String pillName, int pillsLeft, String schedule) async {
+      String index, String pillName, int pillsLeft, String schedule) async {
     db
         .child(treeTop)
-        .child(pillName)
-        .set({'PillsLeft': pillsLeft, 'Schedule': schedule});
+        .child(index)
+        .set({'Name': pillName, 'PillsLeft': pillsLeft, 'Schedule': schedule});
   }
 
   Future<void> updateDb(String index, String pillNames, int updatedPillsLeft,
