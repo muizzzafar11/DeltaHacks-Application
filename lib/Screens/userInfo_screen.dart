@@ -1,9 +1,7 @@
 import 'dart:async';
-import 'dart:math';
-
-import 'package:deltahacks/components/pill.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // Pills you have to take each day
 
@@ -31,54 +29,97 @@ class UserInfoState extends State<UserInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Stack(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Text(
-                  'Pills Taken Each Day',
-                  style: TextStyle(
-                      color: const Color(0xff00688B),
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  'Max of 5 Pills Each Day',
-                  style: TextStyle(
-                      color: const Color(0xff00688B),
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: BarChart(
-                      mainBarData(),
-                      swapAnimationDuration: animDuration,
+    return Column(
+      children: <Widget>[
+        AspectRatio(
+          aspectRatio: 1,
+          child: Stack(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.max,
+                  children: <Widget>[
+                    Text(
+                      'Pills Taken Each Day',
+                      style: TextStyle(
+                          color: const Color(0xff00688B),
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold),
                     ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Text(
+                      'Max of 5 Pills Each Day',
+                      style: TextStyle(
+                          color: const Color(0xff00688B),
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: BarChart(
+                          mainBarData(),
+                          swapAnimationDuration: animDuration,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // Call Button
+        Container(
+          alignment: Alignment.bottomRight,
+          margin: EdgeInsets.all(10),
+          height: 80.0,
+          child: SizedBox.fromSize(
+            size: Size(80, 80),
+            child: ClipOval(
+              child: Material(
+                color: Color.fromRGBO(0, 160, 227, 1),
+                child: InkWell(
+                  splashColor: Color.fromRGBO(248, 177, 1, 1),
+                  // splash color
+                  onTap: () {
+                    launch("tel://214324234");
+                  },
+                  // button pressed
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.call,
+                        color: Colors.white,
+                      ), // icon
+                      Text(
+                        "Call",
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
-              ],
+              ),
             ),
           ),
-        ],
-      ),
+        )
+      ],
     );
   }
 

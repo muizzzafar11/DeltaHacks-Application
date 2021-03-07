@@ -34,11 +34,32 @@ class _RandomValuePageState extends State<RandomValuePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(listOfPills[index].name,
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w200,
-                            color: HexColor('#BD0016'))),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      listOfPills[index].name,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w200,
+                        color: HexColor('#0052D4'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      (50 - listOfPills[index].pillsLeft).toString() +
+                          " Pills Left in Dispenser",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w200,
+                        color: HexColor('#0052D4'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     SleekCircularSlider(
                       appearance: appearance01,
                       initialValue:
@@ -55,13 +76,13 @@ final customWidth01 =
     CustomSliderWidths(trackWidth: 2, progressBarWidth: 20, shadowWidth: 50);
 final customColors01 = CustomSliderColors(
     dotColor: Colors.white.withOpacity(0.8),
-    trackColor: HexColor('#FF8282').withOpacity(0.6),
+    trackColor: HexColor('#0052D4').withOpacity(0.6),
     progressBarColors: [
-      HexColor('#FFE2E2').withOpacity(0.9),
-      HexColor('#FFAD8D').withOpacity(0.9),
-      HexColor('#FE6490').withOpacity(0.5)
+      HexColor('#0083B0').withOpacity(0.5),
+      HexColor('#2193b0').withOpacity(0.9),
+      HexColor('#6dd5ed').withOpacity(0.9),
     ],
-    shadowColor: HexColor('#FFD7E2'),
+    shadowColor: HexColor('#0052D4'),
     shadowMaxOpacity: 0.08);
 
 final info = InfoProperties(
