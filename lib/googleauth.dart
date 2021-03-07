@@ -16,7 +16,6 @@ class GoogleAuth {
   bool loggedIn = false;
   bool initializeFirebase = false;
   final text = 'Hello world';
-  final String treeTop = 'Pills';
 
   GoogleAuth();
 
@@ -67,14 +66,13 @@ class GoogleAuth {
   Future<void> writeToDb(
       String index, String pillName, int pillsLeft, String schedule) async {
     db
-        .child(treeTop)
         .child(index)
         .set({'Name': pillName, 'PillsLeft': pillsLeft, 'Schedule': schedule});
   }
 
   Future<void> updateDb(String index, String pillNames, int updatedPillsLeft,
       String updatedSchedule) async {
-    db.child(treeTop).child(index).update({
+    db.child(index).update({
       'Name': pillNames,
       'PillsLeft': updatedPillsLeft,
       'Schedule': updatedSchedule
@@ -86,20 +84,21 @@ class GoogleAuth {
     db.once().then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> values =
           new Map<String, dynamic>.from(snapshot.value);
-      temp = values["Pills"][pillName][field];
+      temp = values[pillName][field];
     });
     return temp;
   }
 
   Future<void> getDBVal() async {
-    // if (listOfPills != null) return;
     await db.once().then((DataSnapshot snapshot) async {
       Map<String, dynamic> values =
           new Map<String, dynamic>.from(snapshot.value);
 
-      for (var i = 0; i < values["Pills"].length; i++) {
+      values.forEach((key, value) {
+        print(value["PillsLeft"]);
+
         List<int> tempIntArr = [];
-        String str = values["Pills"][i]["Schedule"].toString();
+        String str = value["Schedule"].toString();
         String tempStr = "";
         for (var j = 0; j < str.length; j++) {
           if (str[j] == ",") {
@@ -111,14 +110,29 @@ class GoogleAuth {
         }
 
         listOfPills.add(Pill(
-            name: values["Pills"][i]["Name"].toString(),
-            pillsLeft: int.parse(values["Pills"][i]["PillsLeft"].toString()),
+            name: value["Name"].toString(),
+            pillsLeft: int.parse(value["PillsLeft"].toString()),
             schedule: tempIntArr));
-      }
-    });
+      });
 
-    listOfPills.forEach((element) {
-      print(element.toString());
+      // for (var i = 0; i < values.length; i++) {
+      //   List<int> tempIntArr = [];
+      //   String str = values[i.toString()]["Schedule"].toString();
+      //   String tempStr = "";
+      //   for (var j = 0; j < str.length; j++) {
+      //     if (str[j] == ",") {
+      //       tempIntArr.add(int.parse(tempStr));
+      //       tempStr = "";
+      //     } else {
+      //       tempStr += str[j];
+      //     }
+      //   }
+
+      //   listOfPills.add(Pill(
+      //       name: values[i.toString()]["Name"].toString(),
+      //       pillsLeft: int.parse(values[i.toString()]["PillsLeft"].toString()),
+      //       schedule: tempIntArr));
+      // }
     });
   }
 
