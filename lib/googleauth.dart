@@ -84,31 +84,28 @@ class GoogleAuth {
     return temp;
   }
 
-  void getDBVal() {
-    db.once().then((DataSnapshot snapshot) {
-      Map<dynamic, dynamic> values =
+  Future<void> getDBVal() async {
+    await db.once().then((DataSnapshot snapshot) async {
+      Map<String, dynamic> values =
           new Map<String, dynamic>.from(snapshot.value);
 
-      print(values["Pills"]["0"]["Name"]);
-
-      for (var i = 0; i < values.length; i++) {
+      for (var i = 0; i < values["Pills"].length; i++) {
         List<int> tempIntArr = [];
-        String str = values["Pills"][i.toString()]["Schedule"].toString();
+        String str = values["Pills"][i]["Schedule"].toString();
         String tempStr = "";
         for (var j = 0; j < str.length; j++) {
           if (str[j] == ",") {
-            tempIntArr[j] = int.parse(tempStr);
+            tempIntArr.add(int.parse(tempStr));
             tempStr = "";
-            break;
           } else {
             tempStr += str[j];
           }
         }
-        dbPills[i] = Pill(
-            name: values["Pills"][i.toString()]["Name"].toString(),
-            pillsLeft: int.parse(
-                values["Pills"][i.toString()]["PillsLeft"].toString()),
-            schedule: tempIntArr);
+
+        listOfPills.add(Pill(
+            name: values["Pills"][i]["Name"].toString(),
+            pillsLeft: int.parse(values["Pills"][i]["PillsLeft"].toString()),
+            schedule: tempIntArr));
       }
     });
   }
