@@ -156,7 +156,7 @@ class AddViewPopup {
                       //print(schedule);
                       fireStore.writeToDb(listOfPills.length.toString(), name,
                           numberOfPills, schedule);
-                      // voidCallback();
+                      voidCallback();
                       Navigator.pop(context);
                     },
                     child: Text("Save")),
