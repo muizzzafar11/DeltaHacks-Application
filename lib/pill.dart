@@ -4,7 +4,13 @@ class Pill {
   List<int> schedule;
 
   Pill({this.pillsLeft, this.schedule, this.name});
+
+  String toString() {
+    return this.name;
+  }
 }
+
+List<Pill> dbPills = [];
 
 List<Pill> listOfPills = [
   Pill(name: "pill1", schedule: [1, 0, 1, 2, 0, 1, 0], pillsLeft: 7),
