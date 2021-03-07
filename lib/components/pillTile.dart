@@ -22,7 +22,8 @@ class _PillTileState extends State<PillTile> {
             listOfPills[widget.index].name,
           ),
           trailing: GestureDetector(
-            onTap: () => EditViewPopup(title: listOfPills[widget.index].name)
+            onTap: () => EditViewPopup(
+                    title: listOfPills[widget.index].name, index: widget.index)
                 .popup(context),
             child: Icon(Icons.create_rounded),
           ),
