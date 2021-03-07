@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class GoogleAuth {
   // Sign in
@@ -8,12 +8,13 @@ class GoogleAuth {
   final GoogleSignIn _googleSignin = GoogleSignIn();
 
   // Database
-  final FirebaseFirestore db = FirebaseFirestore.instance;
+  final db = FirebaseDatabase.instance.reference();
 
   User currentUser;
   bool loggedIn = false;
   bool initializeFirebase = false;
   final text = 'Hello world';
+  final String pillNames = 'Pills';
 
   GoogleAuth();
 
@@ -54,7 +55,21 @@ class GoogleAuth {
     }
   }
 
-  Future<void> writeToDb(String text) async {}
+  Future<void> writeToDb(
+      String pillName, String pillsLeft, String schedule) async {
+    db
+        .child(pillNames)
+        .child(pillName)
+        .set({'PillsLeft': pillsLeft, 'Schedule': schedule});
+  }
+
+  Future<void> updateDb(String text, List pillNames) async {}
+
+  Future<String> getFromDb(String field) async {
+    return null;
+  }
+
+  Future<void> deleteFromDb(String field) async {}
 
   void signOutUser() async {
     await _googleSignin.signOut();
