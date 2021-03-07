@@ -1,12 +1,8 @@
 import 'package:deltahacks/components/popup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:deltahacks/components/pill.dart';
 import 'package:deltahacks/components/pillTile.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-
-import '../googleauth.dart';
 
 // const data = {
 //   {"name": "pill1", "Pills Left": 7, "Schedule": "1,0,1,2,0,1,0"},
@@ -23,19 +19,20 @@ class PillsPage extends StatefulWidget {
 }
 
 class _PillsState extends State<PillsPage> {
+
+  bool flag = false;
+  bool prevFlag = true;
+  int arrLen = 0;
+
   final VoidCallback voidCallback;
 
   _PillsState({this.voidCallback});
 
+
   @override
   void initState() {
-    _getThingsOnStartup().then((value) => print("Async Done"));
+    // _getThingsOnStartup().then((value) => print("Async Done"));
     super.initState();
-  }
-
-  Future _getThingsOnStartup() async {
-    await fireStore.getDBVal();
-    // await Future.delayed(Duration(seconds: 2));
   }
 
   @override

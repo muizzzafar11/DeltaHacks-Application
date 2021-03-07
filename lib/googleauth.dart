@@ -24,8 +24,14 @@ class GoogleAuth {
   Future<void> dbInit() async {
     loggedIn = await _googleSignin.isSignedIn();
     await _googleSignin.isSignedIn()
-        ? currentUser = _auth.currentUser
+        ? _getThingsOnStartup()
         : await signInNewUser();
+  }
+
+  Future _getThingsOnStartup() async {
+    currentUser = _auth.currentUser;
+    await fireStore.getDBVal();
+    // await Future.delayed(Duration(seconds: 2));
   }
 
   Future<void> signInNewUser() async {
@@ -53,8 +59,10 @@ class GoogleAuth {
         assert(user.uid == currentUser.uid);
         loggedIn = true;
         print('Signin With Google Suceeded with user uid: ${user.uid}');
+        
       }
     }
+    await fireStore.getDBVal();
   }
 
   Future<void> writeToDb(
@@ -85,6 +93,7 @@ class GoogleAuth {
   }
 
   Future<void> getDBVal() async {
+    // if (listOfPills != null) return;
     await db.once().then((DataSnapshot snapshot) async {
       Map<String, dynamic> values =
           new Map<String, dynamic>.from(snapshot.value);
@@ -107,6 +116,10 @@ class GoogleAuth {
             pillsLeft: int.parse(values["Pills"][i]["PillsLeft"].toString()),
             schedule: tempIntArr));
       }
+    });
+
+    listOfPills.forEach((element) {
+      print(element.toString());
     });
   }
 
