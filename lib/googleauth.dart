@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_database/firebase_database.dart';
 
+import 'components/pill.dart';
+
 class GoogleAuth {
   // Sign in
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -14,7 +16,7 @@ class GoogleAuth {
   bool loggedIn = false;
   bool initializeFirebase = false;
   final text = 'Hello world';
-  final String pillNames = 'Pills';
+  final String treeTop = 'Pills';
 
   GoogleAuth();
 
@@ -56,17 +58,56 @@ class GoogleAuth {
   }
 
   Future<void> writeToDb(
-      String pillName, String pillsLeft, String schedule) async {
+      String pillName, int pillsLeft, String schedule) async {
     db
-        .child(pillNames)
+        .child(treeTop)
         .child(pillName)
         .set({'PillsLeft': pillsLeft, 'Schedule': schedule});
   }
 
-  Future<void> updateDb(String text, List pillNames) async {}
+  Future<void> updateDb(String index, String pillNames, int updatedPillsLeft,
+      String updatedSchedule) async {
+    db.child(treeTop).child(index).update({
+      'Name': pillNames,
+      'PillsLeft': updatedPillsLeft,
+      'Schedule': updatedSchedule
+    });
+  }
 
-  Future<String> getFromDb(String field) async {
-    return null;
+  String getSingleValFromDb(String pillName, String field) {
+    String temp;
+    db.once().then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values =
+          new Map<String, dynamic>.from(snapshot.value);
+      temp = values["Pills"][pillName][field];
+    });
+    return temp;
+  }
+
+  Future<void> getDBVal() async {
+    await db.once().then((DataSnapshot snapshot) async {
+      Map<String, dynamic> values =
+          new Map<String, dynamic>.from(snapshot.value);
+
+      for (var i = 0; i < values["Pills"].length; i++) {
+        List<int> tempIntArr = [];
+        String str = values["Pills"][i]["Schedule"].toString();
+        String tempStr = "";
+        for (var j = 0; j < str.length; j++) {
+          if (str[j] == ",") {
+            tempIntArr.add(int.parse(tempStr));
+            tempStr = "";
+          } else {
+            tempStr += str[j];
+          }
+        }
+
+        listOfPills.add(Pill(
+            name: values["Pills"][i]["Name"].toString(),
+            pillsLeft: int.parse(values["Pills"][i]["PillsLeft"].toString()),
+            schedule: tempIntArr));
+      }
+    });
   }
 
   Future<void> deleteFromDb(String field) async {}

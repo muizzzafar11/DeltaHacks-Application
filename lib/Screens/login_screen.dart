@@ -1,3 +1,4 @@
+import 'package:deltahacks/Screens/pills_screen.dart';
 import 'package:flutter/material.dart';
 import '../googleauth.dart';
 import 'main_screen.dart';
@@ -14,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return fireStore.loggedIn
-        ? MainScreen()
+        ? PillsPage()
         : Container(
             height: size.height,
             width: size.width,

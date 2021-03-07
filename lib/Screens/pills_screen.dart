@@ -6,10 +6,12 @@ import 'package:deltahacks/components/pill.dart';
 import 'package:deltahacks/components/pillTile.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
-const data = {
-  {"name": "pill1", "Pills Left": 7, "Schedule": "1,0,1,2,0,1,0"},
-  {"name": "pill2", "Pills Left": 20, "Schedule": "1,0,1,2,0,1,0"}
-};
+import '../googleauth.dart';
+
+// const data = {
+//   {"name": "pill1", "Pills Left": 7, "Schedule": "1,0,1,2,0,1,0"},
+//   {"name": "pill2", "Pills Left": 20, "Schedule": "1,0,1,2,0,1,0"}
+// };
 
 class PillsPage extends StatefulWidget {
   @override
@@ -17,6 +19,17 @@ class PillsPage extends StatefulWidget {
 }
 
 class _PillsState extends State<PillsPage> {
+  @override
+  void initState() {
+    _getThingsOnStartup().then((value) => print("Async Done"));
+    super.initState();
+  }
+
+  Future _getThingsOnStartup() async {
+    await fireStore.getDBVal();
+    // await Future.delayed(Duration(seconds: 2));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
