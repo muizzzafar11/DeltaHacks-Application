@@ -10,14 +10,24 @@ import 'package:deltahacks/components/pillTile.dart';
 // };
 
 class PillsPage extends StatefulWidget {
+  final VoidCallback voidCallback;
+
+  PillsPage({this.voidCallback});
+
   @override
-  _PillsState createState() => _PillsState();
+  _PillsState createState() => _PillsState(voidCallback: this.voidCallback);
 }
 
 class _PillsState extends State<PillsPage> {
+
   bool flag = false;
   bool prevFlag = true;
   int arrLen = 0;
+
+  final VoidCallback voidCallback;
+
+  _PillsState({this.voidCallback});
+
 
   @override
   void initState() {
@@ -37,7 +47,7 @@ class _PillsState extends State<PillsPage> {
           padding: EdgeInsets.only(bottom: 100),
           child: FloatingActionButton.extended(
             onPressed: () {
-              return AddViewPopup().popup(context);
+              return AddViewPopup(this.voidCallback).popup(context);
             },
             label: Icon(Icons.add),
           )),
