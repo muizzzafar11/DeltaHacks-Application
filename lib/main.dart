@@ -40,25 +40,30 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedIndex = 0;
 
- pageDecider(int page) {  
-   if (page == 0) {
-   return MainScreen();  
-   } else if  (page == 1){
-      return PillsPage();
-   } else if  (page == 2){
-         return LoginScreen();
-   // Analytics Screen
-   } else if(page == 3){
-  return HomePage();
-   }
-}
+  pageDecider(int page) {
+    if (page == 0) {
+      return MainScreen();
+    } else if (page == 1) {
+      return PillsPage(
+        voidCallback: () {
+          setState(() {});
+        },
+      );
+    } else if (page == 2) {
+      return LoginScreen();
+      // Analytics Screen
+    } else if (page == 3) {
+      return HomePage();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body:pageDecider(selectedIndex),
+      body: pageDecider(selectedIndex),
       bottomNavigationBar: FFNavigationBar(
         theme: FFNavigationBarTheme(
           barBackgroundColor: Colors.white,

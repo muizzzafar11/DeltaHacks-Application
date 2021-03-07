@@ -4,6 +4,8 @@ import 'package:deltahacks/components/pill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 class EditViewPopup {
   final String title;
   int numberOfPills, pillPerDay, index;
@@ -64,10 +66,8 @@ class EditViewPopup {
                       //   print(element.pillsLeft);
                       //   print(element.schedule);
                       // });
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return PillsPage();
-                      }));
+
+                      Navigator.pop(context);
                     },
                     child: Text("Save")),
               )
@@ -80,6 +80,9 @@ class EditViewPopup {
 class AddViewPopup {
   String name;
   int numberOfPills, pillPerDay;
+  VoidCallback voidCallback;
+
+  AddViewPopup(this.voidCallback);
 
   popup(context) {
     return AwesomeDialog(
@@ -142,10 +145,8 @@ class AddViewPopup {
                       // listOfPills.forEach((element) {
                       //   print(element.schedule);
                       // });
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return PillsPage();
-                      }));
+                      voidCallback();
+                      Navigator.pop(context);
                     },
                     child: Text("Save")),
               )
