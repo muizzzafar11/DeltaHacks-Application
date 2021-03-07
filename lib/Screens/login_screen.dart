@@ -1,7 +1,7 @@
+import 'package:deltahacks/Screens/main_screen.dart';
 import 'package:deltahacks/Screens/pills_screen.dart';
 import 'package:flutter/material.dart';
 import '../googleauth.dart';
-import 'main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -15,20 +15,24 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return fireStore.loggedIn
-        ? PillsPage()
-        : Container(
-            height: size.height,
-            width: size.width,
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Image(
-                    image: AssetImage("assets/logo.png"),
-                    height: size.height / 3,
-                  ),
-                  SizedBox(height: 20),
-                  _signInButton(),
-                ]),
+        ? Scaffold(
+            body: MainScreen(title: 'Delta Dispenser'),
+          )
+        : Scaffold(
+            body: Container(
+              height: size.height,
+              width: size.width,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: <Widget>[
+                    Image(
+                      image: AssetImage("assets/logo.png"),
+                      height: size.height / 3,
+                    ),
+                    SizedBox(height: 20),
+                    _signInButton(),
+                  ]),
+            ),
           );
   }
 
