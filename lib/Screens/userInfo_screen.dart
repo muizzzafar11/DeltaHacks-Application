@@ -36,12 +36,15 @@ class UserInfoState extends State<UserInfo> {
           child: Stack(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.all(20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
+                    const SizedBox(
+                      height: 50,
+                    ),
                     Text(
                       'Pills Taken Each Day',
                       style: TextStyle(
@@ -80,10 +83,12 @@ class UserInfoState extends State<UserInfo> {
             ],
           ),
         ),
-
+        const SizedBox(
+          height: 100,
+        ),
         // Call Button
         Container(
-          alignment: Alignment.bottomRight,
+          alignment: Alignment.bottomCenter,
           margin: EdgeInsets.all(10),
           height: 80.0,
           child: SizedBox.fromSize(
