@@ -1,5 +1,6 @@
 import 'package:deltahacks/Screens/pills_screen.dart';
 import 'package:deltahacks/Screens/userInfo_screen.dart';
+import 'package:deltahacks/ui/random_value_page.dart';
 import 'package:flutter/material.dart';
 import '../googleauth.dart';
 import 'package:ff_navigation_bar/ff_navigation_bar.dart';
@@ -33,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
   pageDecider(int page) {
     if (page == 0) {
       // Replaced by analytics Page
-      return PillsPage();
+      return RandomValuePage();
     } else if (page == 1) {
       // User Info Page
       return UserInfo();

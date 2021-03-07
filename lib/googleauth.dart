@@ -59,7 +59,6 @@ class GoogleAuth {
         assert(user.uid == currentUser.uid);
         loggedIn = true;
         print('Signin With Google Suceeded with user uid: ${user.uid}');
-        
       }
     }
     await fireStore.getDBVal();

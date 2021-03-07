@@ -23,32 +23,31 @@ class _RandomValuePageState extends State<RandomValuePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
+      body: ListView.builder(
           itemCount: listOfPills.length,
           itemBuilder: (BuildContext context, int index) {
-       
             return Container(
-            child: SafeArea(
-                child: Align(
+                child: SafeArea(
+                    child: Align(
               alignment: Alignment.center,
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                                        Text(listOfPills[index].name,
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w200,
-                              color: HexColor('#BD0016'))),
+                    Text(listOfPills[index].name,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w200,
+                            color: HexColor('#BD0016'))),
                     SleekCircularSlider(
                       appearance: appearance01,
-                      initialValue: Random().nextInt(100).toDouble(),
+                      initialValue:
+                          50.0 - listOfPills[index].pillsLeft.toDouble(),
                     ),
-
                   ]),
             )));
           }),
-);
+    );
   }
 }
 
