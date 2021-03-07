@@ -83,6 +83,7 @@ class UserInfoState extends State<UserInfo> {
 
         // Call Button
         Container(
+          alignment: Alignment.bottomRight,
           margin: EdgeInsets.all(10),
           height: 80.0,
           child: SizedBox.fromSize(
